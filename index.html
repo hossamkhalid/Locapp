@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--
+    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
+
+    Licensed to the Apache Software Foundation (ASF) under one
+    or more contributor license agreements.  See the NOTICE file
+    distributed with this work for additional information
+    regarding copyright ownership.  The ASF licenses this file
+    to you under the Apache License, Version 2.0 (the
+    "License"); you may not use this file except in compliance
+    with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing,
+    software distributed under the License is distributed on an
+    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+     KIND, either express or implied.  See the License for the
+    specific language governing permissions and limitations
+    under the License.
+-->
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<script id="app-init">
+			$(function() {
+				$( "body>[data-role='panel']" ).panel();
+			});
+			$(function(){
+				$( "[data-role='header'], [data-role='footer']" ).toolbar();
+			});
+			$(function(){
+				$( "[data-role='header']" ).toolbar({ theme: "a" });
+				$( "[data-role='footer']" ).toolbar({ theme: "b" });
+			});
+		</script>
+        <title>LOCAPP</title>
+    </head>
+    <body>
+		<div data-role="header" data-theme="b" role="banner" class="ui-header ui-bar-b">
+			<a href="#mainMenuPanel" class="ui-btn-left ui-alt-icon ui-nodisc-icon ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Back</a>
+			<h1 class="ui-title" role="heading" aria-level="1">LOCAPP</h1>
+			<a href="#rightSettingsPanel" class="ui-btn-right ui-alt-icon ui-nodisc-icon ui-btn ui-icon-gear ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Back</a>
+		</div>
+        <div data-role="page" id="page_RecentCards">
+			
+			<div role="main" class="ui-content">
+				<h3>RECENT CARDS</h3>
+			</div><!-- /content -->
+
+		</div><!-- /page -->
+		<div data-role="page" id="page_SearchCards">
+
+			<div role="main" class="ui-content">
+				<h3>SEARCH CARDS</h3>
+			</div><!-- /content -->
+
+		</div><!-- /page -->
+		<div data-role="page" id="page_AddCard">
+
+			<div role="main" class="ui-content">
+				<h3>ADD NEW CARD</h3>
+			</div><!-- /content -->
+
+		</div><!-- /page -->
+		<div data-role="page" id="page_AppInfo">
+
+			<div role="main" class="ui-content">
+				<h3>APP INFO</h3>
+				<p>App v0.1</p>
+			</div><!-- /content -->
+
+		</div><!-- /page -->
+		<div data-role="page" id="page_Settings">
+
+			<div role="main" class="ui-content">
+				<h3>APP SETTINGS</h3>
+			</div><!-- /content -->
+
+		</div><!-- /page -->
+		<div data-role="footer" data-position="fixed">
+			<h1>Fixed Footer!</h1>
+		</div>
+		<div data-role="panel" id="mainMenuPanel" data-position="left" data-display="overlay" data-theme="a">
+		
+			<h3>LOCAPP MENU</h3>
+			<a href="#page_RecentCards" data-rel="close" class="ui-btn ui-icon-clock ui-btn-icon-left">Recent cards</a>
+			<a href="#page_SearchCards" data-rel="close" class="ui-btn ui-icon-search ui-btn-icon-left">Search cards</a>
+			<a href="#page_AddCard" data-rel="close" class="ui-btn ui-icon-plus ui-btn-icon-left">Add card</a>
+			
+		</div>
+		<div data-role="panel" id="rightSettingsPanel" data-position="right" data-display="push" data-theme="b">
+			
+			<h3>SETTINGS MENU</h3>
+			<a href="#page_AppInfo" data-rel="close" class="ui-btn ui-icon-info ui-btn-icon-left">App info</a>
+			<a href="#page_Settings" data-rel="close" class="ui-btn ui-icon-gear ui-btn-icon-left">Settings</a>
+
+		</div>
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript">
+            app.initialize();
+        </script>
+    </body>
+</html>

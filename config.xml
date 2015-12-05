@@ -64,6 +64,7 @@
   <access origin="*"/>
   <plugin name="cordova-plugin-whitelist" version="1"/>
   <plugin name="net.roughshod.plugins.barcodescanner" spec="3.0.0" source="pgb" />
+  <plugin name="phonegap-plugin-barcodescanner" />
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>

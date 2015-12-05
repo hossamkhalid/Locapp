@@ -47,3 +47,21 @@ var app = {
         console.log('Received Event: ' + id);
     }
 };
+
+function scan() {
+    var scanner = cordova.require("cordova/plugin/BarcodeScanner");
+
+    scanner.scan(function (result) {
+        if (result.format == "QR_CODE" || result.format == "DATA_MATRIX" || result.format == "PDF417" || result.format == "RSS_EXPANDED")
+        {
+            //$.mobile.changePage("#scanError", { role: "dialog" });
+        }
+        else
+        {
+            document.getElementById('txt_BarCode').value = result.text;
+            console.log(result);
+        }
+    }, function (error) {
+        //$.mobile.changePage("#scanError", { role: "dialog" });
+    });
+}

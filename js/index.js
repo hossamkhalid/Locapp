@@ -118,7 +118,7 @@ function loadCurrentCard() {
 	} else {
 		$("#img_Details_Barcode").barcode(
 			currentCard.data, // Value barcode (dependent on the type of barcode)
-			"ean13", // type (string)
+			currentCard.dataType, // type (string)
 			settings
 		);
 	}

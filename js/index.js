@@ -127,24 +127,22 @@ function loadCurrentCard() {
 
 function deleteCurrentCard() {
 	var index = -1;
+	var tmpArray = [];
 	for (i = 0; i < storedCards.length; i++) { 
 		if(storedCards[i].name == currentCard.name && storedCards.data == currentCard.data) {
 			index = i;
 		}
+		tmpArray.push(storedCards[i]);
 	}
 	
-	if(index > -1) {
-		storedCards.splice(index, 1);
-		window.localStorage.setItem("locapp_cards", JSON.stringify(storedCards));
-	}
-	
+	storedCards = tmpArray;
+	window.localStorage.setItem("locapp_cards", JSON.stringify(storedCards));
+		
 	history.back();
-	
-	
 }
 
 function deleteAllCards() {
-	window.localStorage.setItem("locapp_cards", JSON.stringify(storedCards));
+	window.localStorage.removeItem("locapp_cards");
 }
 
 function getStoredCards() {

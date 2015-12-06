@@ -100,14 +100,14 @@ function setCurrentCard(name, data, dataType) {
 }
 
 function loadCurrentCard() {
-	alert(JSON.stringify(currentCard));
 	$('#txt_Details_Name').text(currentCard.name);
 	$('#txt_Details_Data').text(currentCard.data);
 	$('#img_Details_Barcode').empty();
 	
 	var settings = {
-          barWidth: 2,
-          barHeight: 200          
+          barWidth: 1,
+		  output: "bmp",
+		  color: "#000000" 		  
         };
 	if(currentCard.dataType.contains("QR")) {
 		$('#img_Details_Barcode').ClassyQR({

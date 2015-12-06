@@ -48,6 +48,9 @@ var app = {
     }
 };
 
+var storedCards = [];
+var currentCard = {};
+
 function scan() {
     var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
@@ -58,10 +61,62 @@ function scan() {
         }
         else
         {
-            document.getElementById('txt_BarCode').value = result.text;
+            document.getElementById('txt_Add_BarCode').value = result.text;
+			currentCard = {
+				name: "",
+				data: result.text,
+				dataType: result.format,
+				isRecent: false
+			}
             console.log(result);
         }
     }, function (error) {
         //$.mobile.changePage("#scanError", { role: "dialog" });
     });
 }
+
+function saveCard() {
+	var cardNumber = document.getElementById('txt_Add_BarCode').value;
+	currentCard.name = document.getElementById('txt_Add_CardName').value;
+	currentCard.data="12345";
+	storedCards.push(currentCard);
+	if(cardNumber != null && cardNumber != "") {
+		window.localStorage.setItem("locapp_cards", JSON.stringify(storedCards));
+	}
+}
+
+function compareCards(a,b) {
+  if (a.name < b.name)
+    return -1;
+  if (a.name > b.name)
+    return 1;
+  return 0;
+}
+
+function getStoredCards() {
+	var cards = window.localStorage.getItem("locapp_cards");
+	if(cards != null && cards != "") {
+		storedCards = eval(cards);
+		storedCards = storedCards.sort(compareCards);
+		$('#lst_Search_AllCards').empty();
+		for (i = 0; i < storedCards.length; i++) { 
+			$('#lst_Search_AllCards').append("<li><a href=\"#\" class=\"ui-btn ui-btn-icon-right ui-icon-carat-r\">" +
+							"<h2>"+storedCards[i].name+"</h2>"+
+							"<p>"+storedCards[i].data+"</p>"+
+							"</a></li>").listview('refresh');;
+		}
+	}	
+	/*
+	$("#demo").barcode(
+		"1234567890128", // Value barcode (dependent on the type of barcode)
+		"ean13" // type (string)
+	);
+	
+	$('#qr').ClassyQR({
+	   create: true, // signals the library to create the image tag inside the container div.
+	   type: 'text', // text/url/sms/email/call/locatithe text to encode in the QR. on/wifi/contact, default is TEXT
+	   text: 'Welcome to jQueryScript!' // the text to encode in the QR. 
+	});
+	*/
+}
+

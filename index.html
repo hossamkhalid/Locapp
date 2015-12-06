@@ -30,9 +30,11 @@
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 		<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+		<script type="text/javascript" src="js/jquery-barcode.min.js"></script>
+		<script type="text/javascript" src="js/jquery.classyqr.min.js"></script>
 		<script id="app-init">
 			$(function() {
-				$( "body>[data-role='panel']" ).panel();
+				$( "[data-role='panel']" ).panel();
 			});
 			$(function(){
 				$( "[data-role='header'], [data-role='footer']" ).toolbar();
@@ -41,14 +43,17 @@
 				$( "[data-role='header']" ).toolbar({ theme: "a" });
 				$( "[data-role='footer']" ).toolbar({ theme: "b" });
 			});
+			$(function(){
+				$( "[id='page_SearchCards']" ).on( "pageshow", function( event ) { getStoredCards(); } );
+			});			
 		</script>
         <title>LOCAPP</title>
     </head>
     <body>
 		<div data-role="header" data-theme="b" role="banner" class="ui-header ui-bar-b">
-			<a href="#mainMenuPanel" class="ui-btn-left ui-alt-icon ui-nodisc-icon ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Back</a>
+			<a href="#mainMenuPanel" class="ui-btn-left ui-alt-icon ui-nodisc-icon ui-btn ui-icon-bars ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Menu</a>
 			<h1 class="ui-title" role="heading" aria-level="1">LOCAPP</h1>
-			<a href="#rightSettingsPanel" class="ui-btn-right ui-alt-icon ui-nodisc-icon ui-btn ui-icon-gear ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Back</a>
+			<a href="#rightSettingsPanel" class="ui-btn-right ui-alt-icon ui-nodisc-icon ui-btn ui-icon-gear ui-btn-icon-notext ui-corner-all" data-role="button" role="button">Settings</a>
 		</div>
         <div data-role="page" id="page_RecentCards">
 			
@@ -61,6 +66,13 @@
 
 			<div role="main" class="ui-content">
 				<h3>SEARCH CARDS</h3>
+				<div data-demo-html="true">
+				
+				<ul id="lst_Search_AllCards" data-role="listview" data-filter="true" data-filter-placeholder="Search by card name or number" data-inset="true" class="ui-listview ui-listview-inset ui-corner-all ui-shadow">
+					
+				</ul>
+				</div>
+				
 			</div><!-- /content -->
 
 		</div><!-- /page -->
@@ -68,8 +80,20 @@
 
 			<div role="main" class="ui-content">
 				<h3>ADD NEW CARD</h3>
-			    <input type="text" name="txtBarCode" id="txt_BarCode" value="" placeholder="Enter Card Number">
-				<a href="#" class="ui-btn ui-btn-inline ui-icon-camera ui-btn-icon-right" onclick="scan()">SCAN</a>
+				<div class="ui-field-contain">
+					<label for="txt_Add_CardName">Card name</label>
+					<input type="text" data-clear-btn="true" name="txt_Add_CardName" id="txt_Add_CardName" value="" placeholder="A name for your new card">
+				</div>
+				<div class="ui-field-contain">
+					<label for="txt_Add_BarCode">Barcode data</label>
+					<input type="text" name="txt_Add_BarCode" id="txt_Add_BarCode" value="" placeholder="Scan barcode" disabled="disabled">
+					<a href="#" class="ui-btn-right ui-btn-inline ui-icon-camera ui-btn-icon-notext ui-corner-all" onclick="scan()">SCAN</a>
+				</div>		
+				<div class="ui-field-contain">
+					<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right" onclick="saveCard()">CLEAR</a>
+					<a href="#" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-right" onclick="saveCard()">SAVE</a>
+				</div>    
+				
 			</div><!-- /content -->
 
 		</div><!-- /page -->

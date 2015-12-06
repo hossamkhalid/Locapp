@@ -100,7 +100,6 @@ function setCurrentCard(name, data, dataType) {
 }
 
 function loadCurrentCard() {
-	alert(JSON.stringify(currentCard));
 	$('#txt_Details_Name').text(currentCard.name);
 	$('#txt_Details_Data').text(currentCard.data);
 	$('#img_Details_Barcode').empty();
@@ -110,7 +109,8 @@ function loadCurrentCard() {
 		  output: "bmp",
 		  color: "#000000" 		  
         };
-	if(currentCard.dataType.contains("QR")) {
+		
+	if(currentCard.dataType.indexOf("QR") > -1) {
 		$('#img_Details_Barcode').ClassyQR({
 		   create: true, // signals the library to create the image tag inside the container div.
 		   type: 'text', // text/url/sms/email/call/locatithe text to encode in the QR. on/wifi/contact, default is TEXT

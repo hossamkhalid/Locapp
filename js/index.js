@@ -128,15 +128,13 @@ function loadCurrentCard() {
 function deleteCurrentCard() {
 	var index = -1;
 	var tmpArray = [];
-	alert(JSON.stringify(currentCard));
 	for (i = 0; i < storedCards.length; i++) { 
-	alert(JSON.stringify(storedCards[i]));
 		if(storedCards[i].name == currentCard.name && storedCards[i].data == currentCard.data) {
 			index = i;
+		} else {
+			tmpArray.push(storedCards[i]);
 		}
-		tmpArray.push(storedCards[i]);
 	}
-	alert(JSON.stringify(tmpArray));
 	storedCards = tmpArray;
 	window.localStorage.setItem("locapp_cards", JSON.stringify(storedCards));
 		

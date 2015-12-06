@@ -78,7 +78,6 @@ function scan() {
 function saveCard() {
 	var cardNumber = document.getElementById('txt_Add_BarCode').value;
 	currentCard.name = document.getElementById('txt_Add_CardName').value;
-	currentCard.data="12345";
 	storedCards.push(currentCard);
 	if(cardNumber != null && cardNumber != "") {
 		window.localStorage.setItem("locapp_cards", JSON.stringify(storedCards));

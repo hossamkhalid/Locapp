@@ -70,10 +70,10 @@ function scan() {
 }
 
 function saveCard() {
-	var cardNumber = document.getElementById('txt_Add_BarCode').value;
 	currentCard.name = document.getElementById('txt_Add_CardName').value;
+	//currentCard.data = document.getElementById('txt_Add_BarCode').value;
 	storedCards.push(currentCard);
-	if(cardNumber != null && cardNumber != "") {
+	if(currentCard != null) {
 		window.localStorage.setItem("locapp_cards", JSON.stringify(storedCards));
 	}
 }
@@ -100,10 +100,16 @@ function setCurrentCard(name, data, dataType) {
 }
 
 function loadCurrentCard() {
+	
 	$('#txt_Details_Name').text(currentCard.name);
 	$('#txt_Details_Data').text(currentCard.data);
 	$('#img_Details_Barcode').empty();
-	if(currentData.dataType.contains("QR")) {
+	
+	var settings = {
+          barWidth: 2,
+          barHeight: 200          
+        };
+	if(currentCard.dataType.contains("QR")) {
 		$('#img_Details_Barcode').ClassyQR({
 		   create: true, // signals the library to create the image tag inside the container div.
 		   type: 'text', // text/url/sms/email/call/locatithe text to encode in the QR. on/wifi/contact, default is TEXT
@@ -112,7 +118,8 @@ function loadCurrentCard() {
 	} else {
 		$("#img_Details_Barcode").barcode(
 			currentCard.data, // Value barcode (dependent on the type of barcode)
-			currentCard.dataType // type (string)
+			"ean13", // type (string)
+			settings
 		);
 	}
 }

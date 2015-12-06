@@ -149,4 +149,12 @@ h1 {
 	width: 100% !important;
 }
 
+.popupCenter {
+	text-align: center;
+}
+
+.invalid {
+	background-color: #FFE4C4 !important;
+}
+
 

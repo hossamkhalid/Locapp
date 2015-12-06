@@ -70,12 +70,43 @@ function scan() {
 }
 
 function saveCard() {
-	currentCard.name = document.getElementById('txt_Add_CardName').value;
-	//currentCard.data = document.getElementById('txt_Add_BarCode').value;
+	currentCard.name = document.getElementById('txt_Add_CardName').value.trim();
+	currentCard.data = document.getElementById('txt_Add_BarCode').value.trim();
+	if(currentCard.name.trim() == "") {
+		$('#txt_Add_CardName_Div div').addClass('invalid');
+		return false;
+	} else {
+		$('#txt_Add_CardName_Div div').removeClass('invalid');
+	}
+	
+	if(currentCard.data.trim() == "") {
+		$('#txt_Add_BarCode_Div div').addClass('invalid');
+		return false;
+	} else {
+		$('#txt_Add_BarCode_Div div').removeClass('invalid');
+	}
+	
 	storedCards.push(currentCard);
 	if(currentCard != null) {
 		window.localStorage.setItem("locapp_cards", JSON.stringify(storedCards));
+		$('#popup_Add_Confirm_Message').text("Card added");
+		clearAddCards();
+		$(':mobile-pagecontainer').pagecontainer('change', '#page_Popup', {
+			transition: 'pop',
+			changeHash: true,
+			reverse: false,
+			showLoadMsg: true
+		});
 	}
+}
+
+function openMyCards() {
+	$(':mobile-pagecontainer').pagecontainer('change', '#page_SearchCards', {
+		transition: 'none',
+		changeHash: false,
+		reverse: false,
+		showLoadMsg: true
+	});
 }
 
 function compareCards(a,b) {
@@ -151,6 +182,7 @@ function deleteCurrentCard() {
 	window.localStorage.setItem("locapp_cards", JSON.stringify(storedCards));
 		
 	history.back();
+	history.back();
 }
 
 function deleteAllCards() {
@@ -186,5 +218,11 @@ function getStoredCards() {
 
 function zoomInOut() {
 	$( "#popupPhotoLandscape" ).popup("open");
+}
+
+function clearAddCards() {
+	document.getElementById('txt_Add_CardName').value = "";
+	document.getElementById('txt_Add_BarCode').value = "";
+	
 }
 

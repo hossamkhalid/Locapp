@@ -61,7 +61,53 @@
 			
 			<div role="main" class="ui-content">
 				<h3>RECENT CARDS</h3>
-				<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right" onclick="deleteAllCards()">DELETE ALL CARDS</a>
+			</div><!-- /content -->
+
+		</div><!-- /page -->
+		<div data-role="page" id="page_Popup" data-dialog="true" data-close-btn="none">
+			
+			<div data-role="header">
+				<h1>LOCAPP</h1>
+			</div><!-- /header -->
+			
+			<div role="main" class="ui-content">
+				<p id="popup_Add_Confirm_Message"></p>
+				<div class="popupCenter">
+					<a href="#" data-rel="back" class="ui-btn ui-btn-inline ui-icon-arrow-l ui-btn-icon-left" data-theme="b">ADD ANOTHER CARD</a>
+					<a href="#" class="ui-btn ui-btn-inline ui-icon-action ui-btn-icon-right" onclick="openMyCards()">MY CARDS</a>
+				</div>
+				
+			</div><!-- /content -->
+
+		</div><!-- /page -->
+		<div data-role="page" id="page_PopupDelete" data-dialog="true" data-close-btn="none">
+			
+			<div data-role="header">
+				<h1>LOCAPP</h1>
+			</div><!-- /header -->
+			
+			<div role="main" class="ui-content">
+				<p>Are you sure you want to delete this card?</p>
+				<div class="popupCenter">
+					<a href="#" data-rel="back" class="ui-btn ui-btn-inline ui-icon-arrow-l ui-btn-icon-left" data-theme="b">CANCEL</a>
+					<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right" onclick="deleteCurrentCard()">DELETE</a>
+				</div>
+				
+			</div><!-- /content -->
+
+		</div><!-- /page -->
+		<div data-role="page" id="page_PopupDeleteAll" data-dialog="true" data-close-btn="none">
+			
+			<div data-role="header">
+				<h1>LOCAPP</h1>
+			</div><!-- /header -->
+			
+			<div role="main" class="ui-content">
+				<p>Are you sure you want to delete all cards?</p>
+				<div class="popupCenter">
+					<a href="#" data-rel="back" class="ui-btn ui-btn-inline ui-icon-arrow-l ui-btn-icon-left" data-theme="b">CANCEL</a>
+					<a href="#" data-rel="back" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right" onclick="deleteAllCards()">DELETE</a>
+				</div>
 				
 			</div><!-- /content -->
 
@@ -84,20 +130,21 @@
 
 			<div role="main" class="ui-content">
 				<h3>ADD NEW CARD</h3>
-				<div class="ui-field-contain">
-					<label for="txt_Add_CardName">Card name</label>
-					<input type="text" data-clear-btn="true" name="txt_Add_CardName" id="txt_Add_CardName" value="" placeholder="A name for your new card">
-				</div>
-				<div class="ui-field-contain">
-					<label for="txt_Add_BarCode">Barcode data</label>
-					<input type="text" name="txt_Add_BarCode" id="txt_Add_BarCode" value="" placeholder="Scan barcode" disabled2="disabled2">
-					<a href="#" class="ui-btn-right ui-btn-inline ui-icon-camera ui-btn-icon-notext ui-corner-all" onclick="scan()">SCAN</a>
-				</div>		
-				<div class="ui-field-contain">
-					<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right" onclick="saveCard()">CLEAR</a>
-					<a href="#" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-right" onclick="saveCard()">SAVE</a>
-				</div>    
-				
+				<form action="#" id="addCardForm">
+					<div class="ui-field-contain required" id="txt_Add_CardName_Div">
+						<label for="txt_Add_CardName">Card name</label>
+						<input type="text" data-clear-btn="true" name="txt_Add_CardName" id="txt_Add_CardName" value="" placeholder="A name for your new card">
+					</div>
+					<div class="ui-field-contain required" id="txt_Add_BarCode_Div">
+						<label for="txt_Add_BarCode">Barcode data</label>
+						<input type="text" name="txt_Add_BarCode" id="txt_Add_BarCode" value="" placeholder="Scan barcode" disabled2="disabled2">
+						<a href="#" class="ui-btn-right ui-btn-inline ui-icon-camera ui-btn-icon-notext ui-corner-all" onclick="scan()">SCAN</a>
+					</div>		
+					<div class="ui-field-contain">
+						<input type="button" value="SAVE" data-icon="check" data-theme="a" onclick="saveCard()" formnovalidate>
+						<input type="reset" value="CLEAR" data-icon="delete" data-theme="a">						
+					</div>    
+				</form>
 			</div><!-- /content -->
 
 		</div><!-- /page -->
@@ -115,7 +162,7 @@
 						<div id="img_Details_Barcode_Popup"></div>
 					</div>
 					<a href="#" class="ui-btn ui-btn-inline ui-icon-arrow-l ui-btn-icon-left" data-rel="back">BACK</a>
-					<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right" onclick="deleteCurrentCard()">DELETE</a>
+					<a href="#page_PopupDelete" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right" data-transition="pop">DELETE</a>
 				</div>
 				<div class="ui-field-contain">
 					
@@ -134,6 +181,7 @@
 
 			<div role="main" class="ui-content">
 				<h3>APP SETTINGS</h3>
+				<a href="#page_PopupDeleteAll" data-transition="pop" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right">DELETE ALL CARDS</a>
 			</div><!-- /content -->
 
 		</div><!-- /page -->

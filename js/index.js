@@ -100,6 +100,7 @@ function setCurrentCard(name, data, dataType) {
 }
 
 function loadCurrentCard() {
+	alert(JSON.stringify(currentCard));
 	$('#txt_Details_Name').text(currentCard.name);
 	$('#txt_Details_Data').text(currentCard.data);
 	$('#img_Details_Barcode').empty();

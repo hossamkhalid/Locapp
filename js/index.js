@@ -55,21 +55,15 @@ function scan() {
     var scanner = cordova.require("cordova/plugin/BarcodeScanner");
 
     scanner.scan(function (result) {
-        if (result.format == "QR_CODE" || result.format == "DATA_MATRIX" || result.format == "PDF417" || result.format == "RSS_EXPANDED")
-        {
-            //$.mobile.changePage("#scanError", { role: "dialog" });
-        }
-        else
-        {
-            document.getElementById('txt_Add_BarCode').value = result.text;
-			currentCard = {
-				name: "",
-				data: result.text,
-				dataType: result.format,
-				isRecent: false
-			}
-            console.log(result);
-        }
+        //if (result.format == "QR_CODE" || result.format == "DATA_MATRIX" || result.format == "PDF417" || result.format == "RSS_EXPANDED")
+        document.getElementById('txt_Add_BarCode').value = result.text;
+		currentCard = {
+			name: "",
+			data: result.text,
+			dataType: result.format,
+			isRecent: false
+		}
+		console.log(result);
     }, function (error) {
         //$.mobile.changePage("#scanError", { role: "dialog" });
     });
@@ -92,6 +86,55 @@ function compareCards(a,b) {
   return 0;
 }
 
+function setCurrentCard(name, data, dataType) {
+	currentCard.name = name;
+	currentCard.data = data;
+	currentCard.dataType = dataType;
+	
+	$(':mobile-pagecontainer').pagecontainer('change', '#page_CardDetails', {
+        transition: 'slide',
+        changeHash: true,
+        reverse: false,
+        showLoadMsg: true
+    });
+}
+
+function loadCurrentCard() {
+	$('#txt_Details_Name').text(currentCard.name);
+	$('#txt_Details_Data').text(currentCard.data);
+	$('#img_Details_Barcode').empty();
+	if(currentData.dataType.contains("QR")) {
+		$('#img_Details_Barcode').ClassyQR({
+		   create: true, // signals the library to create the image tag inside the container div.
+		   type: 'text', // text/url/sms/email/call/locatithe text to encode in the QR. on/wifi/contact, default is TEXT
+		   text: currentCard.data // the text to encode in the QR. 
+		});
+	} else {
+		$("#img_Details_Barcode").barcode(
+			currentCard.data, // Value barcode (dependent on the type of barcode)
+			currentCard.dataType // type (string)
+		);
+	}
+}
+
+function deleteCurrentCard() {
+	var index = -1;
+	for (i = 0; i < storedCards.length; i++) { 
+		if(storedCards[i].name == currentCard.name && storedCards.data == currentCard.data) {
+			index = i;
+		}
+	}
+	
+	if(index > -1) {
+		storedCards.splice(index, 1);
+		window.localStorage.setItem("locapp_cards", JSON.stringify(storedCards));
+	}
+	
+	history.back();
+	
+	
+}
+
 function getStoredCards() {
 	var cards = window.localStorage.getItem("locapp_cards");
 	if(cards != null && cards != "") {
@@ -99,7 +142,7 @@ function getStoredCards() {
 		storedCards = storedCards.sort(compareCards);
 		$('#lst_Search_AllCards').empty();
 		for (i = 0; i < storedCards.length; i++) { 
-			$('#lst_Search_AllCards').append("<li><a href=\"#\" class=\"ui-btn ui-btn-icon-right ui-icon-carat-r\">" +
+			$('#lst_Search_AllCards').append("<li><a href=\"#\" class=\"ui-btn ui-btn-icon-right ui-icon-carat-r\" onclick=\"setCurrentCard('"+storedCards[i].name+"','"+storedCards[i].data+"','"+storedCards[i].dataType+"')\">" +
 							"<h2>"+storedCards[i].name+"</h2>"+
 							"<p>"+storedCards[i].data+"</p>"+
 							"</a></li>").listview('refresh');;

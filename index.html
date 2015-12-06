@@ -45,6 +45,7 @@
 			});
 			$(function(){
 				$( "[id='page_SearchCards']" ).on( "pageshow", function( event ) { getStoredCards(); } );
+				$( "[id='page_CardDetails']" ).on( "pageshow", function( event ) { loadCurrentCard(); } );
 			});			
 		</script>
         <title>LOCAPP</title>
@@ -86,7 +87,7 @@
 				</div>
 				<div class="ui-field-contain">
 					<label for="txt_Add_BarCode">Barcode data</label>
-					<input type="text" name="txt_Add_BarCode" id="txt_Add_BarCode" value="" placeholder="Scan barcode" disabled="disabled">
+					<input type="text" name="txt_Add_BarCode" id="txt_Add_BarCode" value="" placeholder="Scan barcode" disabled2="disabled2">
 					<a href="#" class="ui-btn-right ui-btn-inline ui-icon-camera ui-btn-icon-notext ui-corner-all" onclick="scan()">SCAN</a>
 				</div>		
 				<div class="ui-field-contain">
@@ -94,6 +95,23 @@
 					<a href="#" class="ui-btn ui-btn-inline ui-icon-check ui-btn-icon-right" onclick="saveCard()">SAVE</a>
 				</div>    
 				
+			</div><!-- /content -->
+
+		</div><!-- /page -->
+		<div data-role="page" id="page_CardDetails">
+
+			<div role="main" class="ui-content">
+				<div class="ui-field-contain">
+					<div class="rcorners2">
+						<p id="txt_Details_Name"></p>
+						<p id="txt_Details_Data"></p>
+						<div id="img_Details_Barcode"></div>
+					</div>
+				</div>
+				<div class="ui-field-contain">
+					<a href="#" class="ui-btn ui-btn-inline ui-icon-arrow-l ui-btn-icon-left" data-rel="back">BACK</a>
+					<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right" onclick="deleteCurrentCard()">DELETE</a>
+				</div>  
 			</div><!-- /content -->
 
 		</div><!-- /page -->

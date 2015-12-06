@@ -25,7 +25,7 @@
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-tap-highlight" content="no" />
         <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
+        <meta name="viewport" content="user-scalable=yes, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=medium-dpi" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
 		<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
 		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
@@ -46,7 +46,8 @@
 			$(function(){
 				$( "[id='page_SearchCards']" ).on( "pageshow", function( event ) { getStoredCards(); } );
 				$( "[id='page_CardDetails']" ).on( "pageshow", function( event ) { loadCurrentCard(); } );
-			});			
+				
+			});				
 		</script>
         <title>LOCAPP</title>
     </head>
@@ -61,6 +62,7 @@
 			<div role="main" class="ui-content">
 				<h3>RECENT CARDS</h3>
 				<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right" onclick="deleteAllCards()">DELETE ALL CARDS</a>
+				
 			</div><!-- /content -->
 
 		</div><!-- /page -->
@@ -105,7 +107,13 @@
 				<div class="rcorners2">
 					<p id="txt_Details_Name"></p>
 					<p id="txt_Details_Data"></p>
-					<div id="img_Details_Barcode"></div>
+					<div id="div_Details_BarCodeContainer" onclick="zoomInOut()">
+						<div id="img_Details_Barcode"></div>
+					</div>
+					<div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="b" data-corners="false" data-tolerance="30,15">
+					    <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn-a ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+						<div id="img_Details_Barcode_Popup"></div>
+					</div>
 					<a href="#" class="ui-btn ui-btn-inline ui-icon-arrow-l ui-btn-icon-left" data-rel="back">BACK</a>
 					<a href="#" class="ui-btn ui-btn-inline ui-icon-delete ui-btn-icon-right" onclick="deleteCurrentCard()">DELETE</a>
 				</div>

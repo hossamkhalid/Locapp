@@ -132,4 +132,21 @@ h1 {
 	text-align: center;
 }
 
+.scaleDown{
+    zoom: 0.5;
+    -moz-transform: scale(0.5);
+}
+
+#popupPhotoLandscape-screen  {
+	opacity: 1 !important;
+}
+
+#img_Details_Barcode_Popup {
+	width: 200px !important;
+}
+
+#img_Details_Barcode_Popup object {
+	width: 100% !important;
+}
+
 

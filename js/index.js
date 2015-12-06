@@ -100,6 +100,8 @@ function setCurrentCard(name, data, dataType) {
 }
 
 function loadCurrentCard() {
+	//currentCard.data = "1234567890128";
+	//currentCard.dataType = "EAN_13";
 	$('#txt_Details_Name').text(currentCard.name);
 	$('#txt_Details_Data').text(currentCard.data);
 	$('#img_Details_Barcode').empty();
@@ -116,8 +118,18 @@ function loadCurrentCard() {
 		   type: 'text', // text/url/sms/email/call/locatithe text to encode in the QR. on/wifi/contact, default is TEXT
 		   text: currentCard.data // the text to encode in the QR. 
 		});
+		$('#img_Details_Barcode_Popup').ClassyQR({
+		   create: true, // signals the library to create the image tag inside the container div.
+		   type: 'text', // text/url/sms/email/call/locatithe text to encode in the QR. on/wifi/contact, default is TEXT
+		   text: currentCard.data // the text to encode in the QR. 
+		});
 	} else {
 		$("#img_Details_Barcode").barcode(
+			currentCard.data, // Value barcode (dependent on the type of barcode)
+			currentCard.dataType, // type (string)
+			settings
+		);
+		$("#img_Details_Barcode_Popup").barcode(
 			currentCard.data, // Value barcode (dependent on the type of barcode)
 			currentCard.dataType, // type (string)
 			settings
@@ -170,5 +182,9 @@ function getStoredCards() {
 	   text: 'Welcome to jQueryScript!' // the text to encode in the QR. 
 	});
 	*/
+}
+
+function zoomInOut() {
+	$( "#popupPhotoLandscape" ).popup("open");
 }
 

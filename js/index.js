@@ -154,8 +154,8 @@ function saveCard() {
 	
 	storedCards.push(currentCard);
 	if(currentCard != null) {
-		writeToFile("locappcards.locapp", JSON.stringify(storedCards));
-		//window.localStorage.setItem("locapp_cards", JSON.stringify(storedCards));
+		//writeToFile("locappcards.locapp", JSON.stringify(storedCards));
+		localStorage.setItem("locapp_cards", JSON.stringify(storedCards));
 		$('#popup_Add_Confirm_Message').text("Card added");
 		clearAddCards();
 		$(':mobile-pagecontainer').pagecontainer('change', '#page_Popup', {
@@ -253,11 +253,11 @@ function deleteCurrentCard() {
 }
 
 function deleteAllCards() {
-	window.localStorage.removeItem("locapp_cards");
+	localStorage.removeItem("locapp_cards");
 }
 
 function getStoredCards() {
-	var cards = readFromFile('locappcards.locapp');//window.localStorage.getItem("locapp_cards");
+	var cards = localStorage.getItem("locapp_cards");//readFromFile('locappcards.locapp');//window.localStorage.getItem("locapp_cards");
 	if(cards != null && cards != "") {
 		storedCards = eval(cards);
 		storedCards = storedCards.sort(compareCards);

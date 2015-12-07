@@ -113,7 +113,8 @@ var errorHandler = function (fileName, e) {
 			break;
 	};
 
-	console.log('Error (' + fileName + '): ' + msg);
+	alert('Error (' + fileName + '): ' + msg);
+	
 }
 
 function scan() {

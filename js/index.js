@@ -161,8 +161,8 @@ function loadCurrentCard() {
         textonly: false,
         html: ""
    	});
-	currentCard.data = "9794024334156801";
-	currentCard.dataType = "CODE_128";
+	//currentCard.data = "9794024334156801";
+	//currentCard.dataType = "CODE_128";
 	$('#txt_Details_Name').text(currentCard.name);
 	$('#txt_Details_Data').text(currentCard.data);
 	$('#img_Details_Barcode').empty();

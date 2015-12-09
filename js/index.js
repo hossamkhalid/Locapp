@@ -97,6 +97,8 @@ function saveCard() {
 		$('#txt_Add_BarCode_Div div').removeClass('invalid');
 	}
 	
+	getStoredCards();
+	
 	storedCards.push(currentCard);
 	
 	if(currentCard != null) {
@@ -159,8 +161,8 @@ function loadCurrentCard() {
         textonly: false,
         html: ""
    	});
-	//currentCard.data = "1234567890128";
-	//currentCard.dataType = "EAN_13";
+	currentCard.data = "9794024334156801";
+	currentCard.dataType = "CODE_128";
 	$('#txt_Details_Name').text(currentCard.name);
 	$('#txt_Details_Data').text(currentCard.data);
 	$('#img_Details_Barcode').empty();
